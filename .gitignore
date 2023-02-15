@@ -1,0 +1,8 @@
+# Godot-specific ignores
+.import/
+
+.vscode/
+
+
+.DS_Store
+*.DS_Store

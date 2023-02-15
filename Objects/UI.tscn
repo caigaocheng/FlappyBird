@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/InfoBoard.gd" type="Script" id=3]
+[ext_resource path="res://FlappyBirdAssets/img/gameover.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://font/Arvo-Bold.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+resource_local_to_scene = true
+size = 60
+font_data = SubResource( 2 )
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Label
+
+func _ready():
+	add_to_group(\"SCORE\")
+	pass
+	
+func on_score_updated(score):
+	text = \"score: \" + str(score)
+"
+
+[sub_resource type="DynamicFont" id=5]
+resource_local_to_scene = true
+size = 60
+font_data = SubResource( 2 )
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Label
+
+
+func _ready():
+	add_to_group(\"LIFE\")
+	pass
+	
+func on_life_updated(life):
+	text = \"life: \" + str(life)
+"
+
+[sub_resource type="DynamicFont" id=7]
+resource_local_to_scene = true
+size = 20
+font_data = SubResource( 2 )
+
+[sub_resource type="DynamicFont" id=8]
+resource_local_to_scene = true
+size = 20
+font_data = SubResource( 2 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LabelScore" type="Label" parent="."]
+anchor_right = 1.0
+margin_top = 100.0
+margin_bottom = 173.0
+custom_fonts/font = SubResource( 3 )
+text = "score:0"
+align = 1
+valign = 1
+script = SubResource( 4 )
+
+[node name="LabelLife" type="Label" parent="."]
+visible = false
+anchor_right = 1.0
+margin_left = 375.0
+margin_top = 50.0
+margin_bottom = 172.0
+custom_fonts/font = SubResource( 5 )
+text = "life:10"
+align = 1
+valign = 1
+script = SubResource( 6 )
+
+[node name="TextureInfoBoard" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -181.0
+margin_top = 833.0
+margin_right = 197.0
+margin_bottom = 1370.0
+texture = ExtResource( 4 )
+script = ExtResource( 3 )
+
+[node name="LabelCurrent" type="Label" parent="TextureInfoBoard"]
+anchor_right = 1.0
+margin_left = 265.0
+margin_top = 254.5
+margin_right = -100.0
+margin_bottom = 279.5
+custom_fonts/font = SubResource( 7 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="LabelRecord" type="Label" parent="TextureInfoBoard"]
+anchor_right = 1.0
+margin_left = 270.0
+margin_top = 303.5
+margin_right = -95.0
+margin_bottom = 328.5
+custom_fonts/font = SubResource( 8 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="TextureButton" type="TextureButton" parent="TextureInfoBoard"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[connection signal="pressed" from="TextureInfoBoard/TextureButton" to="TextureInfoBoard" method="on_board_shown"]
